@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Carrito de Compras</title>
+    <!-- Agrega la referencia a Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Carrito</h1>
+
+        <h2 class="mt-4">Productos disponibles:</h2>
+        <ul id="productos-lista">
+            <li>
+                <img src="img/cat 1.jpeg" class="producto-imagen" alt="Producto 1">
+                <span>Calavera y calabacitas - $20 </span>
+                <button class="btn btn-primary" onclick="agregarAlCarrito('Producto 1', 20.00, 'cat 1.jpeg')"> Seleccionar</button>
+            </li>
+            <li>
+                <img src="img/cat 2.jpeg" class="producto-imagen" alt="Producto 2">
+                <span>Fantasmitas - $15 </span>
+                <button class="btn btn-primary" onclick="agregarAlCarrito('Producto 2', 15.00, 'cat 2.jpeg')">Seleccionar</button>
+            </li>
+            <li>
+                <img src="img/cat 3.jpeg" class="producto-imagen" alt="Producto 3">
+                <span>Guia de hallowen - $30 </span>
+                <button class="btn btn-primary" onclick="agregarAlCarrito('Producto 3', 30.00, 'cat 3.jpeg')">Seleccionar</button>
+            </li>
+            <li>
+                <img src="img/cat 4.jpeg" class="producto-imagen" alt="Producto 4">
+                <span>Tendedero fantasmitas - $15 </span>
+                <button class="btn btn-primary" onclick="agregarAlCarrito('Producto 4', 15.00, 'cat 4.jpeg')">Seleccionar</button>
+            </li>
+            <li>
+                <img src="img/cat 5.jpeg" class="producto-imagen" alt="Producto 5">
+                <span>Figuras de madera - $15 </span>
+                <button class="btn btn-primary" onclick="agregarAlCarrito('Producto 5', 15.00, 'cat 5.jpeg')">Seleccionar</button>
+            </li>
+            <li>
+                <img src="img/cat 6.jpeg" class="producto-imagen" alt="Producto 6">
+                <span>Casita de madera - $70 </span>
+                <button class="btn btn-primary" onclick="agregarAlCarrito('Producto 6', 70.00, 'cat 6.jpeg')">Seleccionar</button>
+            </li>
+            <li>
+                <img src="img/cat nav 1.jpeg" class="producto-imagen" alt="Producto 7">
+                <span>Corona navideña - $50 </span>
+                <button class="btn btn-primary" onclick="agregarAlCarrito('Producto 7', 50.00, 'cat nav 1.jpeg')">Seleccionar</button>
+            </li>
+            <li>
+                <img src="img/cat nav 2.jpeg" class="producto-imagen" alt="Producto 8">
+                <span>Figuras navideñas de tela - $20 </span>
+                <button class="btn btn-primary" onclick="agregarAlCarrito('Producto 8', 20.00, 'cat nav 2.jpeg')">Seleccionar</button>
+            </li>
+            <li>
+                <img src="img/cat nav 3.jpeg" class="producto-imagen" alt="Producto 9">
+                <span>Esferas cajita - $40 </span>
+                <button class="btn btn-primary" onclick="agregarAlCarrito('Producto 9', 40.00, 'cat nav 3.jpeg')">Seleccionar</button>
+            </li>
+            <li>
+                <img src="img/cat nav 4.jpeg" class="producto-imagen" alt="Producto 10">
+                <span>Árbol de navidad madera - $200 </span>
+                <button class="btn btn-primary" onclick="agregarAlCarrito('Producto 10', 200.00, 'cat nav 4.jpeg')">Seleccionar</button>
+            </li>
+            <li>
+                <img src="img/cat nav 5.jpeg" class="producto-imagen" alt="Producto 11">
+                <span>Piña de colores - $20 </span>
+                <button class="btn btn-primary" onclick="agregarAlCarrito('Producto 11', 20.00, 'cat nav 5.jpeg')">Seleccionar</button>
+            </li>
+            <li>
+                <img src="img/cat nav 6.jpeg" class="producto-imagen" alt="Producto 12">
+                <span>Lámpara noche buena - $100 </span>
+                <button class="btn btn-primary" onclick="agregarAlCarrito('Producto 12', 100.00, 'cat nav 6.jpeg')">Seleccionar</button>
+            </li>
+            <!-- Agrega más productos aquí -->
+        </ul>
+
+        <h2 class="mt-4">Productos seleccionados:</h2>
+        <ul class="list-group" id="carrito-lista">
+            <!-- Los elementos de la lista de productos en el carrito se agregarán aquí dinámicamente. -->
+        </ul>
+
+        <div class="mt-4">
+            <p>Cantidad de productos en el carrito: <span id="cantidad-productos">0</span></p>
+            <p>Total de compra: $<span id="total-compra">0.00</span></p>
+        </div>
+
+        <!-- Botón para pagar -->
+        <button class="btn btn-success mt-4" onclick="realizarPago()">Pagar</button>
+    </div>
+
+    <!-- Agrega la referencia a Bootstrap JS y jQuery (opcional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+
+    <style>
+        ul#productos-lista li {
+            list-style-type: none;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        img.producto-imagen {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+        }
+    </style>
+
+    <script>
+        var cantidadProductos = 0;
+        var totalCompra = 0;
+        var carrito = [];
+
+        function agregarAlCarrito(nombreProducto, precioProducto, imagenProducto) {
+            // Incrementa la cantidad de productos y el total de compra
+            cantidadProductos++;
+            totalCompra += precioProducto;
+
+            // Actualiza los valores en el HTML
+            document.getElementById("cantidad-productos").textContent = cantidadProductos;
+            document.getElementById("total-compra").textContent = totalCompra.toFixed(2);
+
+            // Agrega el producto al carrito
+            carrito.push({
+                nombre: nombreProducto,
+                precio: precioProducto,
+                imagen: imagenProducto
+            });
+
+            // Actualiza la lista de productos en el carrito
+            actualizarListaCarrito();
+        }
+
+        function eliminarDelCarrito(index) {
+            // Obtén el precio del producto a eliminar
+            var precioProductoEliminado = carrito[index].precio;
+
+            // Reduce la cantidad de productos y el total de compra
+            cantidadProductos--;
+            totalCompra -= precioProductoEliminado;
+
+            // Elimina el producto del carrito
+            carrito.splice(index, 1);
+
+            // Actualiza los valores en el HTML
+            document.getElementById("cantidad-productos").textContent = cantidadProductos;
+            document.getElementById("total-compra").textContent = totalCompra.toFixed(2);
+
+            // Actualiza la lista de productos en el carrito
+            actualizarListaCarrito();
+        }
+
+        function actualizarListaCarrito() {
+            var carritoLista = document.getElementById("carrito-lista");
+            carritoLista.innerHTML = '';
+
+            carrito.forEach(function (producto, index) {
+                var nuevoElemento = document.createElement("li");
+                nuevoElemento.className = "list-group-item";
+
+                // Agrega la imagen al elemento de lista
+                var imagen = document.createElement("img");
+                imagen.src = producto.imagen;
+                imagen.className = "producto-imagen";
+                nuevoElemento.appendChild(imagen);
+
+                // Agrega el nombre y precio del producto
+                nuevoElemento.innerHTML += producto.nombre + " - $" + producto.precio.toFixed(2);
+
+                // Agrega un botón de eliminar
+                var botonEliminar = document.createElement("button");
+                botonEliminar.textContent = "Eliminar";
+                botonEliminar.className = "btn btn-danger btn-sm";
+                botonEliminar.onclick = function() {
+                    eliminarDelCarrito(index);
+                };
+
+                nuevoElemento.appendChild(botonEliminar);
+
+                carritoLista.appendChild(nuevoElemento);
+            });
+        }
+
+        function realizarPago() {
+            // Aquí puedes agregar la lógica de pago, como redireccionar a una página de pago o realizar una acción específica.
+            alert("¡Gracias por tu compra! Pago exitoso.");
+        }
+    </script>
+</body>
+</html>
